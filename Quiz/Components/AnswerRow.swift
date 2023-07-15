@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct AnswerRow: View {
+    @EnvironmentObject var triviaManager: TriviaManager
     var answer: Answer
     @State private var isSelected = false
     
@@ -42,4 +43,5 @@ struct AnswerRow: View {
 
 #Preview {
     AnswerRow(answer: Answer(text: "Single", isCorrect: false))
+        .environmentObject(TriviaManager())
 }
