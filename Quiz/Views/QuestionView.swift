@@ -17,26 +17,31 @@ struct QuestionView: View {
                 
                 Spacer()
                 
-                Text("1 out of 10")
+                Text("\(triviaManager.index + 1) out of \(triviaManager.length)")
                     .foregroundColor(Color("AccentColor"))
                     .fontWeight(.heavy)
             }
             
-            ProgressBar(progress: 40)
+            ProgressBar(progress: triviaManager.progress)
             
             VStack(alignment: .leading, spacing: 20) {
-                Text("What name was historically used for the Turkish city currently known as Istanbul?")
+                Text(triviaManager.question)
                     .font(.system(size: 20))
                     .bold()
                     .foregroundColor(.gray)
                 
-                AnswerRow(answer: Answer(text: "Constantinople", isCorrect: true))
-                    .environmentObject(triviaManager)
-                AnswerRow(answer: Answer(text: "Adrianople", isCorrect: false))
-                    .environmentObject(triviaManager)
+                ForEach(triviaManager.answerChoices, id: \.id) {answer in
+                    AnswerRow(answer: answer)
+                }
+                
             }
             
-            PrimaryButton(text: "Next")
+            Button {
+                triviaManager.goToNextQuestion()
+            } label: {
+                PrimaryButton(text: "Next", background: triviaManager.answerSelected ? Color("AccentColor") : Color(hue: 1.0, saturation: 0.0, brightness: 0.564, opacity: 0.327))
+            }
+            .disabled(!triviaManager.answerSelected)
             
             Spacer()
             
