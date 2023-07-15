@@ -24,16 +24,24 @@ struct QuestionView: View {
             ProgressBar(progress: 40)
             
             VStack(alignment: .leading, spacing: 20) {
-                Text("Which one of the following rhythm games was made by Harmonix?")
+                Text("What name was historically used for the Turkish city currently known as Istanbul?")
                     .font(.system(size: 20))
                     .bold()
                     .foregroundColor(.gray)
+                
+                AnswerRow(answer: Answer(text: "Constantinople", isCorrect: true))
+                AnswerRow(answer: Answer(text: "Adrianople", isCorrect: false))
             }
+            
+            PrimaryButton(text: "Next")
+            
+            Spacer()
             
         }
         .padding()
         .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, maxHeight: .infinity)
         .background(Color(red: 0.984313725490196, green: 0.9294117647058824, blue: 0.8470588235294118))
+        .navigationBarHidden(true)
     }
 }
 
